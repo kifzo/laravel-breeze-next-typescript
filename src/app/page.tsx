@@ -266,11 +266,24 @@ export default function Home() {
                   className="ml-1 underline">
                   Sponsor
                 </a>
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  className="ml-4 -mt-px w-5 h-5 text-gray-400">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <a href="/chakra-test" className="ml-1 underline">
+                  chakraCheck
+                </a>
               </div>
             </div>
 
             <div className="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-              Laravel Breeze + Next.js template
+              Laravel Breeze api + Next.js template
             </div>
           </div>
         </div>
