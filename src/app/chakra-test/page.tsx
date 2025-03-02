@@ -7,15 +7,25 @@ import {
   Heading,
   HStack,
   Input,
-  Link,
+  Link as ChakraLink,
   Text,
   useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { PropsWithChildren, ButtonHTMLAttributes } from 'react'
 
-const LinkButton = ({ children, ...props }: any) => (
-  <Button as={NextLink} {...props}>
+// LinkButtonの型を適切に定義
+interface LinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  href: string
+}
+
+const LinkButton = ({
+  children,
+  href,
+  ...props
+}: PropsWithChildren<LinkButtonProps>) => (
+  <Button as={NextLink} href={href} {...props}>
     {children}
   </Button>
 )
@@ -26,16 +36,31 @@ export default function Home() {
 
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
-      <Flex direction="column" background={formBackGround} p={12} rounded={6}>
-        <Heading mb={6}>ChakraUI TEST</Heading>
+      <Flex
+        direction="column"
+        background={formBackGround}
+        p={12}
+        rounded={6}
+        as="form"
+        aria-labelledby="login-heading">
+        <Heading mb={6} id="login-heading">
+          ChakraUI TEST
+        </Heading>
         <Input
           placeholder="sample@sample.com"
           variant="filled"
           mb={3}
           type="email"
+          aria-label="メールアドレス"
         />
-        <Input placeholder="********" variant="filled" mb={6} type="password" />
-        <Button mb={6} colorScheme="teal">
+        <Input
+          placeholder="********"
+          variant="filled"
+          mb={6}
+          type="password"
+          aria-label="パスワード"
+        />
+        <Button mb={6} colorScheme="teal" type="submit">
           Log in
         </Button>
         <HStack spacing={4} mt={6}>
@@ -45,9 +70,9 @@ export default function Home() {
         <Box mt={4}>
           <Text fontSize="sm">
             Don&apos;t have an account?{' '}
-            <Link color="teal.500" href="/register">
+            <ChakraLink as={NextLink} color="teal.500" href="/register">
               Sign up
-            </Link>
+            </ChakraLink>
           </Text>
         </Box>
       </Flex>
