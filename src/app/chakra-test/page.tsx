@@ -1,13 +1,24 @@
 'use client'
 
 import {
+  Box,
   Button,
   Flex,
   Heading,
+  HStack,
   Input,
+  Link,
+  Text,
   useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react'
+import NextLink from 'next/link'
+
+const LinkButton = ({ children, ...props }: any) => (
+  <Button as={NextLink} {...props}>
+    {children}
+  </Button>
+)
 
 export default function Home() {
   const { toggleColorMode } = useColorMode()
@@ -27,11 +38,18 @@ export default function Home() {
         <Button mb={6} colorScheme="teal">
           Log in
         </Button>
-        <Button onClick={toggleColorMode}>Toggle Color Mode</Button>
-        {/* HTML構造としては <a> タグとして出力 */}
-        <Button as="a" href="/" mt={6}>
-          Back to Home
-        </Button>
+        <HStack spacing={4} mt={6}>
+          <Button onClick={toggleColorMode}>Toggle Color Mode</Button>
+          <LinkButton href="/">Back to Home</LinkButton>
+        </HStack>
+        <Box mt={4}>
+          <Text fontSize="sm">
+            Don&apos;t have an account?{' '}
+            <Link color="teal.500" href="/register">
+              Sign up
+            </Link>
+          </Text>
+        </Box>
       </Flex>
     </Flex>
   )
